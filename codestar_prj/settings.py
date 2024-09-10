@@ -12,6 +12,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+import os
+import dj_database_url
+
+if os.path.isfile('env.py'):
+    import env
+
+
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +37,7 @@ SECRET_KEY = 'django-insecure-zs91td0f%sa8+w2#284apt3#2adcb!=b4j(3&j^fv*e3mks218
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com' ]
+ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
 
 
 # Application definition
@@ -76,13 +86,25 @@ WSGI_APPLICATION = 'codestar_prj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get("postgres://u8uru0jsfvv:ei23xhvxWSL7@ep-gentle-mountain-a23bxz6h-pooler.eu-central-1.aws.neon.tech/ruby_treat_from_893937"))
+# }
+
+
+DATABASES = {
+    'default': dj_database_url.parse("postgres://u8uru0jsfvv:ei23xhvxWSL7@ep-gentle-mountain-a23bxz6h-pooler.eu-central-1.aws.neon.tech/ruby_treat_from_893937")
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
